@@ -3,17 +3,6 @@ import './App.css'
 
 function App() {
 
-  const [informationForImg, setinformationForImg] = useState({
-    title: "",
-    information: "",
-    url: ""
-  });
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api")
-    .then(response => response.json())
-    .then(data => setAllPhotos([...data]));
-  }, []);
 
   const uploadImg = async () => {
     try {
@@ -30,10 +19,10 @@ function App() {
 
   return (
     <>
-      <div>
+      <div id="form">
         <form action="/upload" method="POST" enctype="multipart/form-data">
           <input type="file" name="image" accept="image/*" />
-          <button type="submit" onClick={uploadImg}>Upload Image</button>
+          <button type="submit" id="button" onClick={uploadImg}>Upload Image</button>
         </form>
       </div>
     </>

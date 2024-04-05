@@ -18,13 +18,13 @@ app.post('/api/upload', (req, res) => {
 });
 
 app.delete("/api/photo/:id", (req, res) => {
-    const photoId = request.url.split('/');
+    const photoId = req.url.split('/');
     try {
         const photo = photoId.findByIdAndDelete(photoId);
-        if (!photo) throw new Error(`Photo with id ${photoId} not found`);
-        return response.status(200).send({ msg: "Photo deleted successfully" });
+        if (!photo) throw new Error(`Photo with id ${photoId} not found.`);
+        return res.status(200).send({ msg: "Photo deleted successfully." });
     } catch (err) {
-        return response.status(404).send({ msg: err.message });
+        return res.status(404).send({ message: err.message });
     }
 })
 
