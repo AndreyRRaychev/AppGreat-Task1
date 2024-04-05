@@ -6,7 +6,7 @@ app.listen(3000, () => {
     console.log("Server started in port 3000!");
 })
 
-app.post('/api', (req, res) => {
+app.post('/api/upload', (req, res) => {
     const { body } = req;
     const newPhoto = new Photo(body);
     try {
@@ -17,19 +17,10 @@ app.post('/api', (req, res) => {
     }
 });
 
-app.get("/api/allPhotos", (req, res) => {
-    try {
-        const allPhotos = Photo.find();
-    }
-    catch (err) {
-        return res.send({ err: "error 400" });
-    }
-})
-
 app.delete("/api/photo/:id", (req, res) => {
-    const photoId = request.url.split('/')[3];
+    const photoId = request.url.split('/');
     try {
-        const photo = Photo.findByIdAndDelete(photoId);
+        const photo = photoId.findByIdAndDelete(photoId);
         if (!photo) throw new Error(`Photo with id ${photoId} not found`);
         return response.status(200).send({ msg: "Photo deleted successfully" });
     } catch (err) {
